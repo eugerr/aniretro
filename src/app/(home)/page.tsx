@@ -9,6 +9,7 @@ import { Suspense } from 'react'
 import { Card } from '@/components/ui/card'
 import { FetchResults } from '@/types'
 import AnimeCard, { AnimeCardSkeleton } from '@/components/AnimeCard'
+import { ArrowRightIcon } from '@radix-ui/react-icons'
 
 const getTrendingAnime = cache(
   () => {
@@ -68,11 +69,15 @@ function AnimeGridSection({ animeFetcher, title }: AnimeGridSectionProps) {
   return (
     <div className='space-y-4 flex-1'>
       <div className='flex gap-4 justify-between'>
-        <h2 className='text-xl md:text-3xl font-bold'>{title}</h2>
-        <Button variant='outline' asChild>
+        <h2 className='text-xl md:text-2xl font-bold'>{title}</h2>
+        <Button
+          variant='expandIcon'
+          Icon={ArrowRightIcon}
+          iconPlacement='right'
+          asChild
+        >
           <Link href='/products' className='space-x-2'>
-            <span>View All</span>
-            <ArrowRight className='size-4' />
+            View All
           </Link>
         </Button>
       </div>

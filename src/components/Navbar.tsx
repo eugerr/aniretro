@@ -1,24 +1,25 @@
 'use client'
 
-import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuLink,
-} from '@/components/ui/navigation-menu'
-import { MenuIcon, Moon, MountainIcon, SearchIcon, Sun } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { usePathname } from 'next/navigation'
-import { ComponentProps } from 'react'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import {
+  NavigationMenu,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from '@/components/ui/navigation-menu'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { cn } from '@/lib/utils'
+import { MenuIcon, Moon, SearchIcon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { ComponentProps } from 'react'
+import Logo from './Logo'
 
 function ModeToggle() {
   const { setTheme } = useTheme()
@@ -70,10 +71,9 @@ export default function Navbar() {
           </Button>
         </SheetTrigger>
         <SheetContent side='left'>
-          <Link href='#' className='flex items-center gap-2' prefetch={false}>
-            <MountainIcon className='h-6 w-6' />
-            <span className='font-semibold'>Acme Inc</span>
-          </Link>
+          <div className='flex items-center gap-2'>
+            <Logo />
+          </div>
           <div className='grid gap-2 py-6'>
             <Link
               href='#'
@@ -113,21 +113,15 @@ export default function Navbar() {
           </div>
         </SheetContent>
       </Sheet>
-      <Link
-        href='#'
-        className='hidden md:flex items-center gap-2'
-        prefetch={false}
-      >
-        <MountainIcon className='h-6 w-6' />
-        <span className='sr-only'>Acme Inc</span>
-      </Link>
+      <div className='hidden md:flex items-center gap-2'>
+        <Logo />
+      </div>
 
       <Button
         variant='expandIcon'
-        className='mr-auto w-52 justify-start hidden md:flex'
+        className='md:mr-auto w-72 md:w-48 justify-between hover:scale-90 transition-all duration-300'
         Icon={SearchIcon}
         iconPlacement='right'
-        size='lg'
       >
         Search
       </Button>
