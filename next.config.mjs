@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    domains: ['s4.anilist.co', 'media.kitsu.io'],
+  },
+}
 
-export default nextConfig;
+export default nextConfig
