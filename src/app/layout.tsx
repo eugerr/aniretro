@@ -7,7 +7,6 @@ import Footer from '@/components/Footer'
 
 import './globals.css'
 import { siteConfig } from '@/config/site'
-import { SettingsProvider } from '@/components/settings/SettingsProvider'
 
 export const metadata: Metadata = {
   applicationName: siteConfig.name,
@@ -68,13 +67,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SettingsProvider>
-            <Navbar />
-            <main className='mb-20 px-2 sm:px-4 md:px-6 min-h-screen'>
-              {children}
-            </main>
-            <Footer />
-          </SettingsProvider>
+          <Navbar />
+          <main className='mb-20 px-2 sm:px-4 md:px-6 min-h-screen'>
+            {children}
+          </main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
