@@ -1,57 +1,37 @@
 import { cache } from '@/lib/cache'
 
-import { Hero } from './_components/Hero'
-import { getAnime } from '@/lib/anime'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
-import { Suspense } from 'react'
-import { Card } from '@/components/ui/card'
-import { FetchResults } from '@/types'
 import AnimeCard, { AnimeCardSkeleton } from '@/components/AnimeCard'
+import { Button } from '@/components/ui/button'
+import { getAnime } from '@/lib/anime'
+import { FetchResults } from '@/types'
 import { ArrowRightIcon } from '@radix-ui/react-icons'
+import Link from 'next/link'
+import { Suspense } from 'react'
+import { Hero } from './_components/Hero'
 
-const getTrendingAnime = cache(
-  () => {
-    return getAnime('Trending', 1, 10)
-  },
-  ['/', 'getTrendingAnime'],
-  { revalidate: 60 * 60 * 24 }
-)
+const getAnimeWithCache = (category: string) =>
+  cache(() => getAnime(category, 1, 10), ['/', `get${category}Anime`], {
+    revalidate: 60 * 60 * 24,
+  })
 
-const getPopularAnime = cache(
-  () => {
-    return getAnime('Popular', 1, 10)
-  },
-  ['/', 'getPopularAnime'],
-  { revalidate: 60 * 60 * 24 }
-)
+const getTrendingAnime = getAnimeWithCache('Trending')
+const getPopularAnime = getAnimeWithCache('Popular')
+const getTopRatedAnime = getAnimeWithCache('TopRated')
+const getUpcomingAnime = getAnimeWithCache('Upcoming')
 
-const getTopRatedAnime = cache(
-  () => {
-    return getAnime('TopRated', 1, 10)
-  },
-  ['/', 'getTopRatedAnime'],
-  { revalidate: 60 * 60 * 24 }
-)
-
-const getUpcomingAnime = cache(
-  () => {
-    return getAnime('Upcoming', 1, 10)
-  },
-  ['/', 'getUpcomingAnime'],
-  { revalidate: 60 * 60 * 24 }
-)
-
-export default function Page() {
+export default function HomePage() {
   return (
     <div className='my-2 space-y-10'>
+      {/* Hero Section */}
       <Hero animeFetcher={getTrendingAnime} />
+
+      {/* First Row */}
       <div className='flex flex-col md:flex-row gap-10'>
         <AnimeGridSection title='Trending' animeFetcher={getTrendingAnime} />
         <AnimeGridSection title='Most Popular' animeFetcher={getPopularAnime} />
       </div>
 
+      {/* Second Row */}
       <div className='flex flex-col md:flex-row gap-10'>
         <AnimeGridSection title='Top Rated' animeFetcher={getTopRatedAnime} />
         <AnimeGridSection title='Upcoming' animeFetcher={getUpcomingAnime} />
@@ -83,14 +63,9 @@ function AnimeGridSection({ animeFetcher, title }: AnimeGridSectionProps) {
       </div>
       <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-4'>
         <Suspense
-          fallback={
-            <>
-              <AnimeCardSkeleton />
-              <AnimeCardSkeleton />
-              <AnimeCardSkeleton />
-              <AnimeCardSkeleton />
-            </>
-          }
+          fallback={Array.from({ length: 8 }).map((_, index) => (
+            <AnimeCardSkeleton key={index} />
+          ))}
         >
           <AnimeSuspense animeFetcher={animeFetcher} />
         </Suspense>
