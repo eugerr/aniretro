@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 export default function AnimeCard({ data }: { data: Anime }) {
   return (
-    <Link href={`watch?id=${data.id}`}>
+    <Link href={`/details?id=${data.id}`}>
       <Card className='aspect-[9/12] group relative rounded-lg overflow-hidden shadow-lg transition-all hover:scale-105 cursor-pointer'>
         <div className='relative h-5/6'>
           <Image

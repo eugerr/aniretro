@@ -94,7 +94,7 @@ function CustomCard(props: Anime) {
           buttonVariants({ variant: 'gooeyLeft' }),
           'w-fit mx-auto md:mx-0'
         )}
-        href={`/watch?id=${id}`}
+        href={`/details?id=${id}`}
       >
         Watch Now
       </Link>

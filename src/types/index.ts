@@ -141,3 +141,15 @@ export interface Paging {
   totalResults: number
   results: Anime[]
 }
+
+export interface StreamingAnime {
+  headers: {
+    Referer: string
+  }
+  sources: {
+    url: string
+    isM3U8: boolean
+    quality: string
+  }[]
+  download: string
+}
