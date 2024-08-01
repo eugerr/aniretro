@@ -1,22 +1,14 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { formatTitle } from '@/lib/utils'
 import { Anime, Episode, StreamingAnime } from '@/types'
+import { MediaPlayer, MediaProvider, Poster } from '@vidstack/react'
 import {
-  MediaPlayer,
-  MediaProvider,
-  MediaSrc,
-  MenuButton,
-  Poster,
-} from '@vidstack/react'
-import {
-  DefaultMenuButton,
   DefaultVideoLayout,
   defaultLayoutIcons,
 } from '@vidstack/react/player/layouts/default'
 import { useSearchParams } from 'next/navigation'
-import React, { useState } from 'react'
+import React from 'react'
 
 interface PlayerProps {
   streamingLinks: StreamingAnime
