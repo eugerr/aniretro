@@ -28,7 +28,7 @@ export default function HomePage() {
       {/* First Row */}
       <div className='flex flex-col md:flex-row gap-10'>
         <AnimeGridSection title='Trending' animeFetcher={getTrendingAnime} />
-        <AnimeGridSection title='Most Popular' animeFetcher={getPopularAnime} />
+        <AnimeGridSection title='Popular' animeFetcher={getPopularAnime} />
       </div>
 
       {/* Second Row */}
@@ -56,7 +56,10 @@ function AnimeGridSection({ animeFetcher, title }: AnimeGridSectionProps) {
           iconPlacement='right'
           asChild
         >
-          <Link href='/products' className='space-x-2'>
+          <Link
+            href={`/search?query=${title.toLowerCase()}`}
+            className='space-x-2'
+          >
             View All
           </Link>
         </Button>

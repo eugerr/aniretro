@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Pixelify_Sans } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 
 import Navbar from '@/components/Navbar'
 import { ThemeProvider } from '@/components/ui/theme-provider'
@@ -7,6 +7,7 @@ import Footer from '@/components/Footer'
 
 import './globals.css'
 import { siteConfig } from '@/config/site'
+import { TooltipProvider } from '@/components/ui/tooltip'
 
 export const metadata: Metadata = {
   applicationName: siteConfig.name,
@@ -48,7 +49,7 @@ export const viewport: Viewport = {
   themeColor: '#FFFFFF',
 }
 
-const font = Pixelify_Sans({
+const font = Montserrat({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
 })
@@ -68,9 +69,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className='mb-20 px-2 sm:px-4 md:px-6 min-h-screen'>
-            {children}
-          </main>
+          <TooltipProvider>
+            <main className='mb-20 px-2 sm:px-4 md:px-6 min-h-screen'>
+              {children}
+            </main>
+          </TooltipProvider>
           <Footer />
         </ThemeProvider>
       </body>

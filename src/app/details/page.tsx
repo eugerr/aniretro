@@ -97,7 +97,6 @@ async function AnimeSectionSuspense({
   }
   console.log(data.episodes)
   console.log(episodes)
-  console.log('hi')
   return (
     <Card>
       <CardHeader className='py-2 text-lg md:text-3xl'>
@@ -107,7 +106,6 @@ async function AnimeSectionSuspense({
         <EpisodeSection data={data} episodes={episodes || data.episodes} />
       </CardContent>
       <CardFooter className='flex flex-col items-start'>
-        <h3 className='pb-5'>Episodes</h3>
         <p>{parse(data.description)}</p>
       </CardFooter>
     </Card>

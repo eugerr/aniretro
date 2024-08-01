@@ -162,3 +162,10 @@ export async function fetchAnimeStreamingLinks(episodeId: string) {
 
   return await fetchFromUrl(url)
 }
+
+// Function to fetch anime streaming links
+export async function fetchAnimeSearchResults(query: string) {
+  const url = `${BASE_URL}meta/anilist/${query}`
+
+  return await fetchFromUrl(url)
+}

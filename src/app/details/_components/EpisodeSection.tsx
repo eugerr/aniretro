@@ -19,11 +19,12 @@ export default function EpisodeSection({
 }: EpisodeSectionProps) {
   const [searchTerm, setSearchTerm] = useState('')
 
-  const filteredEpisodes = episodes.filter(
-    (episode) =>
-      episode.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      episode.number.toString().includes(searchTerm)
-  )
+  const filteredEpisodes =
+    episodes.filter(
+      (episode) =>
+        episode?.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        episode?.number?.toString().includes(searchTerm)
+    ) || []
 
   return (
     <div className='flex-1'>
@@ -35,16 +36,20 @@ export default function EpisodeSection({
         onChange={(e) => setSearchTerm(e.target.value)}
         className='mb-5 p-2 border border-gray-300 rounded'
       />
-      <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-        {filteredEpisodes.map((episode) => (
-          <Link
-            key={episode.id}
-            href={`/watch?id=${data.id}&episodeId=${episode.id}`}
-          >
-            <EpisodeCard episode={episode} />
-          </Link>
-        ))}
-      </div>
+      {episodes.length ? (
+        <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+          {filteredEpisodes.map((episode) => (
+            <Link
+              key={episode.id}
+              href={`/watch?id=${data.id}&episodeId=${episode.id}`}
+            >
+              <EpisodeCard episode={episode} />
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <p className='text-center'>No episodes</p>
+      )}
     </div>
   )
 }
