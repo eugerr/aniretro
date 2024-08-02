@@ -1,12 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, CardDescription } from '@/components/ui/card'
+import { Card, CardContent, CardDescription } from '@/components/ui/card'
 import { Anime, Episode } from '@/types'
 import { PlayCircle } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Input } from '@/components/ui/input'
+import { formatTitle } from '@/lib/utils'
 
 interface EpisodeSectionProps {
   data: Anime
@@ -48,7 +49,19 @@ export default function EpisodeSection({
           ))}
         </div>
       ) : (
-        <p className='text-center'>No episodes</p>
+        <Card>
+          <CardContent className='flex items-center justify-center flex-col gap-5'>
+            <div className='relative aspect-video h-52 mt-10'>
+              <Image
+                className='object-cover group-hover:-z-10'
+                src={data.image}
+                alt={`${formatTitle(data.title)} image`}
+                fill
+              />
+            </div>
+            <p className='text-center'>No episodes available</p>
+          </CardContent>
+        </Card>
       )}
     </div>
   )

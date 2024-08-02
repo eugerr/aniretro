@@ -29,7 +29,7 @@ const getAnimeDataWithCache = (
   return cache(
     () => fn(params),
     ['/details', `${cacheKey}-${params}`],
-    { revalidate: 60 * 60 * 24 } // Cache duration in seconds (1 day)
+    { revalidate: false } // Cache duration in seconds (1 day)
   )
 }
 
@@ -95,7 +95,7 @@ async function AnimeSectionSuspense({
   if (!data.episodes) {
     episodes = await getAnimeEpisodes()
   }
-  console.log(data.episodes)
+  console.log(data)
   console.log(episodes)
   return (
     <Card>

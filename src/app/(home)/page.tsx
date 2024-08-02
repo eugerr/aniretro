@@ -46,23 +46,23 @@ interface AnimeGridSectionProps {
 }
 
 function AnimeGridSection({ animeFetcher, title }: AnimeGridSectionProps) {
+  // change " " to "-" and lowercase
+  const urlTitle = `?type=${title.toLowerCase().replace(/\s+/g, '-')}`
+
   return (
     <div className='space-y-4 flex-1'>
       <div className='flex gap-4 justify-between'>
         <h2 className='text-xl md:text-2xl font-bold'>{title}</h2>
-        <Button
+        {/* <Button
           variant='expandIcon'
           Icon={ArrowRightIcon}
           iconPlacement='right'
           asChild
         >
-          <Link
-            href={`/search?query=${title.toLowerCase()}`}
-            className='space-x-2'
-          >
+          <Link href={urlTitle} className='space-x-2'>
             View All
           </Link>
-        </Button>
+        </Button> */}
       </div>
       <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-4'>
         <Suspense
